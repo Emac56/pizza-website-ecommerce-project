@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Golden Crust pizza — Order Online</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html{
+      scroll-behavior:smooth;
+    }
+    @keyframes float {
+      0%, 100% {
+        transform:translateY(0px);
+      }
+      50% {
+        transform:translateY(-10px);
+      }
+    }
+
+    ::-webkit-scrollbar{
+      height:8px;
+      width:8px;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:#d1d5db;
+      border-radius:999px;
+    }
+
+    ::-webkit-scrollbar-track{
+      background:transparent;
+    }
+  </style>
+</head>
+
+<body class="bg-[#fafafa] text-[#222] min-h-screen overflow-x-hidden antialiased">
+
+<div
+  id="toast"
+  class="fixed left-1/2 top-32 z-[9999] h-[72px] w-[260px] -translate-x-1/2 translate-y-[-40px] overflow-hidden rounded-[24px] opacity-0 shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition-all duration-300"
+>
+
+  <img
+    id="toastBg"
+    src=""
+    loading="eager"
+    decoding="async"
+    class="absolute inset-0 h-full w-full object-cover"
+  >
+
+<div
+  class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20"
+></div>
+
+  <div
+    class="relative z-10 flex h-full items-center gap-3 px-4 py-3"
+  >
+
+    <div
+      class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ffd166] shadow-lg shadow-[#ffd166]/20"
+    >
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5 text-[#111]"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M3 3h2l.4 2m0 0L7 13h10l2-8H5.4M7 13l-1 5h12m-9 0a1 1 0 102 0m6 0a1 1 0 102 0"
+        />
+
+      </svg>
+
+    </div>
+
+    <div class="flex flex-col overflow-hidden">
+
+      <span
+        id="toastTitle"
+        class="truncate text-sm font-black text-white"
+      >
+        Product added
+      </span>
+
+      <span
+        id="toastMessage"
+        class="mt-0.5 text-xs font-bold tracking-wide text-[#ffd166]"
+      >
+        1 item in your order
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+    <div class="app flex min-h-screen flex-col">
+
+    <!--
+ HEADER -->
+    <header class="sticky top-0 z-50 border-b border-white/10 bg-[#111]/95 backdrop-blur-xl">
+          <div class="mx-auto flex w-full max-w-[1800px] items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+
+        <div class="brand flex min-w-0 items-center gap-3">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ffd166] shadow-lg shadow-[#ffd166]/20">
+          <svg xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+              class="h-7 w-7">
+
+                <path
+                    d="M3 4L12 21L21 4C15.5 2.5 8.5 2.5 3 4Z"
+                        fill="#ffd166"/>
+
+                          <path
+                              d="M3 4C8.5 2.5 15.5 2.5 21 4"
+                                  stroke="#c97a00"
+                                      stroke-width="2.4"
+                                          stroke-linecap="round"/>
+
+                                            <circle cx="9.5" cy="10" r="1.5" fill="#b91c1c"/>
+                                              <circle cx="14.5" cy="13" r="1.5" fill="#b91c1c"/>
+                                                <circle cx="11.5" cy="16.2" r="1.5" fill="#b91c1c"/>
+
+                                                </svg>
+          </div>
+
+          <div class="min-w-0">
+            <h1 class="truncate text-lg font-black tracking-wide text-white sm:text-xl lg:text-2xl">
+              The Golden Crust pizza
+            </h1>
+
+            <div class="mt-1 flex flex-wrap items-center gap-2 text-xs text-[#ffd166] sm:text-sm">
+              <span>Order & Delivery</span>
+              <span class="h-1 w-1 rounded-full bg-[#ffd166]"></span>
+              <span>Pickup Available</span>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="header-actions flex items-center gap-2 sm:gap-3">
+
+          <!-- DROPDOWN -->
+          <div class="dropdown relative">
+              <button
+              class="btn flex items-center gap-2 rounded-xl bg-[#ffd166] px-4 py-3 text-sm font-bold text-[#111] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl active:scale-95 sm:px-5"
+              onclick="toggleMenu()"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+
+              <span class="hidden sm:inline">Menu</span>
+
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" id="menuArrow">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+
+            <div
+              id="dropMenu"
+              class="dropdown-content invisible absolute right-0 top-16 z-50 w-60 origin-top-right scale-95 overflow-hidden rounded-2xl border border-gray-200 bg-white opacity-0 shadow-2xl transition-all duration-300"
+            >
+              <a href="#" onclick="window.location.href='contact.html'"
+                class="flex items-center gap-3 border-b border-gray-100 px-5 py-4 text-sm font-medium text-[#111] transition-all duration-200 hover:bg-[#ffd166]">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8m-18 8h18V8H3v8z"/>
+                </svg>
+
+                Contact Us
+              </a>
+
+
+              <a href="#" onclick="window.location.href='report.html'"
+                class="flex items-center gap-3 border-b border-gray-100 px-5 py-4 text-sm font-medium text-[#111] transition-all duration-200 hover:bg-[#ffd166]">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-1.414 1.414M15 11l6-6m-6 6v6m0-6H9m6 0V5"/>
+                </svg>
+
+                Report a Problem
+              </a>
+
+              <a href="#" onclick="window.location.href='about.html'"
+                class="flex items-center gap-3 px-5 py-4 text-sm font-medium text-[#111] transition-all duration-200 hover:bg-[#ffd166]">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01"/>
+                </svg>
+
+                About Us
+              </a>
+
+	<button
+  id="logoutBtn"
+  class="rounded-xl bg-red-500 px-4 py-2 text-white"
+>
+  Logout
+</button>
+
+            </div>
+          </div>
+
+          <button
+            class="btn flex items-center gap-2 rounded-xl bg-[#ffd166] px-4 py-3 text-sm font-bold text-[#111] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl active:scale-95 sm:px-5"
+            onclick="window.location.href='login.html'">
+            
+            <span class="sm:hidden">Login</span>
+            <span class="hidden sm:inline">Sign in</span>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main mx-auto flex w-full max-w-[1800px] flex-1 flex-col gap-6 px-4 py-6 sm:px-6 lg:flex-row lg:items-start lg:gap-8 lg:px-8 xl:gap-10">
+
+      <!-- LEFT -->
+      <section class="left min-w-0 flex-1">
+
+        <!-- HERO -->
+        <div class="hero relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-5 shadow-[0_10px_40px_rgba(17,17,17,0.06)] sm:p-8 lg:p-10">
+
+          <div class="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[#ffd166]/20 blur-3xl"></div>
+          <div class="absolute bottom-0 left-0 h-32 w-32 rounded-full bg-gray-100 blur-2xl"></div>
+
+          <div class="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+
+            <div class="intro max-w-2xl">
+              <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-[#ffd166]/40 bg-[#ffd166]/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#111]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#111]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+
+                Fast Delivery
+              </div>
+
+              <h2 class="text-3xl font-black leading-tight text-[#111] sm:text-4xl lg:text-5xl">
+                Hot pizza, fast delivery
+              </h2>
+
+              <p class="mt-4 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-base lg:text-lg">
+                Choose delivery or pickup. Free delivery for orders over ₱500.
+              </p>
+
+              <div class="mt-8 flex flex-wrap items-center gap-4">
+
+                <button class="flex items-center gap-2 rounded-2xl bg-[#111] px-6 py-4 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:scale-95">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#ffd166]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14m-6 0H5a2 2 0 01-2-2V8a2 2 0 012-2h4l6-2v16l-6-2z"/>
+                  </svg>
+
+                  Order Now
+                </button>
+
+                <button class="flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-6 py-4 text-sm font-bold text-[#111] transition-all duration-300 hover:-translate-y-1 hover:border-[#ffd166] hover:shadow-lg active:scale-95">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#0ea5b3]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a5 5 0 00-10 0v2m-2 0h14l-1 11H6L5 9z"/>
+                  </svg>
+
+                  Explore Menu
+                </button>
+
+              </div>
+            </div>
+
+            <div class="flex justify-center lg:justify-end">
+              <div class="animate-[float_4s_ease-in-out_infinite] rounded-full bg-white p-5 shadow-2xl">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                 class="h-[180px] w-[180px]">
+
+                    <path
+                        d="M3 4L12 21L21 4C15.5 2.5 8.5 2.5 3 4Z"
+                            fill="#ffd166"/>
+
+                              <path
+                                  d="M3 4C8.5 2.5 15.5 2.5 21 4"
+                                      stroke="#c97a00"
+                                          stroke-width="2.4"
+                                              stroke-linecap="round"/>
+
+                                                <circle cx="9.5" cy="10" r="1.5" fill="#b91c1c"/>
+                                                  <circle cx="14.5" cy="13" r="1.5" fill="#b91c1c"/>
+                                                    <circle cx="11.5" cy="16.2" r="1.5" fill="#b91c1c"/>
+
+                                                      <circle cx="13" cy="9" r="0.8" fill="#111"/>
+                                                        <circle cx="8.5" cy="14" r="0.8" fill="#111"/>
+
+                                                        </svg>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TOOLBAR -->
+        <div class="toolbar mt-6 flex flex-col gap-4 xl:flex-row xl:items-center">
+
+          <!-- SEARCH -->
+          <div class="search flex-1">
+            <div class="group flex items-center gap-3 rounded-2xl border border-gray-200 bg-white px-4 py-4 shadow-sm transition-all duration-300 hover:shadow-md focus-within:border-[#0ea5b3] focus-within:ring-4 focus-within:ring-[#0ea5b3]/10">
+
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transition-colors duration-300 group-focus-within:text-[#0ea5b3]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m1.85-5.65a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"/>
+              </svg>
+
+              <input
+                type="search"
+                placeholder="Search pizzas, pasta, sides..."
+                class="w-full bg-transparent text-sm outline-none placeholder:text-gray-400 sm:text-base"
+              />
+            </div>
+          </div>
+
+          <!-- CATEGORIES -->
+          <div class="cats flex gap-3 overflow-x-auto pb-1">
+
+            <div id="allBtn" class="cat active flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-full bg-[#ffd166] px-5 py-3 text-sm font-bold text-[#111] shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-95">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+              All
+            </div>
+
+            <div id="pizzaBtn" class="cat flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-semibold text-[#111] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ffd166] hover:bg-[#ffd166]/10 hover:shadow-md active:scale-95">
+              Pizza
+            </div>
+
+            <div id="pastaBtn"class="cat flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-semibold text-[#111] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ffd166] hover:bg-[#ffd166]/10 hover:shadow-md active:scale-95">
+              Pasta
+            </div>
+
+            <div id="sidesBtn" class="cat flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-semibold text-[#111] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ffd166] hover:bg-[#ffd166]/10 hover:shadow-md active:scale-95">
+              Sides
+            </div>
+
+            <div id="drinksBtn" class="cat flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-semibold text-[#111] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ffd166] hover:bg-[#ffd166]/10 hover:shadow-md active:scale-95">
+              Drinks
+            </div>
+
+          </div>
+        </div>
+
+        <!-- MENU GRID -->
+        <section
+          id="menu"
+          class="menu-grid mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+          aria-live="polite"
+        >
+
+	<div
+  id="pizzaContainer"
+  class="contents">
+</div>
+
+      </section>
+
+      <!-- RIGHT -->
+      <aside class="right w-full lg:sticky lg:top-28 lg:w-[360px] xl:w-[400px]">
+
+        <div class="cart overflow-hidden rounded-3xl border border-gray-100 bg-white p-5 shadow-[0_12px_40px_rgba(17,17,17,0.06)] sm:p-6">
+
+          <div class="mb-5 flex items-center justify-between">
+            <div>
+              <h3 id="cartTitle" class="text-2xl font-black text-[#111]">Your cart</h3>
+              <p class="mt-1 text-sm text-gray-500">Review your order</p>
+            </div>
+
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ffd166]/20">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#111]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2m0 0L7 13h10l2-8H5.4M7 13l-1 5h12m-9 0a1 1 0 102 0m6 0a1 1 0 102 0"/>
+              </svg>
+            </div>
+          </div>
+
+          <div id="cartItems" class="cart-items mb-5 flex max-h-[380px] flex-col overflow-y-auto rounded-2xl border border-dashed border-gray-200 bg-gray-50 p-4">
+            <div class="flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2m0 0L7 13h10l2-8H5.4"/>
+              </svg>
+            </div>
+
+            <p class="mt-4 text-base font-semibold text-[#111]">
+              Empty cart
+            </p>
+
+            <p class="mt-1 text-sm text-gray-500">
+              Add delicious items to start your order.
+            </p>
+          </div>
+
+          <div class="mb-5 rounded-2xl bg-gray-50 p-4">
+            <div class="flex items-center justify-between text-lg">
+              <strong class="font-bold text-[#111]">Total:</strong>
+              <strong id="cartTotal" class="text-2xl font-black text-[#111]">₱0</strong>
+            </div>
+          </div>
+
+          <div class="checkout flex flex-col gap-3 sm:flex-row">
+
+            <button
+              class="btn flex flex-1 items-center justify-center gap-2 rounded-2xl bg-[#111] px-5 py-4 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:scale-95"
+              onclick="window.location.href='order.html'"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#ffd166]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+
+              Checkout
+            </button>
+
+            <button
+              class="btn flex flex-1 items-center justify-center gap-2 rounded-2xl bg-gray-100 px-5 py-4 text-sm font-bold text-[#111] transition-all duration-300 hover:-translate-y-1 hover:bg-gray-200 hover:shadow-lg active:scale-95"
+              onclick="clearCart()"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+
+              Clear
+            </button>
+
+          </div>
+
+        </div>
+       </aside>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-8 border-t border-white/10 bg-[#111]">
+      <div class="mx-auto flex max-w-[1800px] flex-col items-center justify-between gap-4 px-4 py-6 text-center text-sm text-white sm:px-6 lg:flex-row lg:px-8 lg:text-left">
+
+        <div>
+          © 2025 The Golden Crust pizza — Made with
+          <span class="text-[#ffd166]"><svg xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 text-[#ffd166] fill-[#ffd166]"
+              viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+               </span>
+        </div>
+
+        <div class="flex items-center gap-3 text-gray-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#ffd166]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h2l3.6 7.59-1.35 2.44A1 1 0 008.14 17H19"/>
+          </svg>
+
+          Contact: 0917-356-0995
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+<script>
+
+  function toggleMenu() {
+    const menu = document.getElementById("dropMenu");
+    const arrow = document.getElementById("menuArrow");
+
+    const isOpen = menu.classList.contains("visible");
+
+    if (isOpen) {
+      menu.classList.remove("visible", "opacity-100", "scale-100");
+      menu.classList.add("invisible", "opacity-0", "scale-95");
+      arrow.classList.remove("rotate-180");
+    } else {
+      menu.classList.remove("invisible", "opacity-0", "scale-95");
+      menu.classList.add("visible", "opacity-100", "scale-100");
+      arrow.classList.add("rotate-180");
+    }
+  }
+
+  window.addEventListener("click", function(e) {
+    const dropdown = document.querySelector(".dropdown");
+    const menu = document.getElementById("dropMenu");
+    const arrow = document.getElementById("menuArrow");
+
+    if (!dropdown.contains(e.target)) {
+      menu.classList.remove("visible", "opacity-100", "scale-100");
+      menu.classList.add("invisible", "opacity-0", "scale-95");
+      arrow.classList.remove("rotate-180");
+    }
+  });
+
+const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  if (!isLoggedIn) {
+    window.location.href = "login.html";
+  }
+
+const logoutBtn = document.querySelector("#logoutBtn");
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("isLoggedIn");
+      window.location.href = "login.html";
+    });
+  }
+
+
+</script>
+<script src="./js/menu.js"></script>
+</body>
+</html>
+
+

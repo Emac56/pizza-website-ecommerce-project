@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Golden Crust Pizza | Checkout</title>
+
+  <!-- PREMIUM FONT -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- TAILWIND -->
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      overflow-x:hidden;
+    }
+
+    h1,h2,h3{
+      letter-spacing:-0.03em;
+    }
+
+    ::-webkit-scrollbar{
+      width:8px;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:#d1d5db;
+      border-radius:999px;
+    }
+
+  </style>
+
+</head>
+
+<body class="min-h-screen bg-[#fafafa] text-[#111] antialiased [font-family:'Inter',sans-serif]">
+
+  <!-- BACKGROUND -->
+
+  <div class="fixed left-0 top-0 -z-10 h-72 w-72 rounded-full bg-[#ffd166]/20 blur-3xl"></div>
+
+  <div class="fixed bottom-0 right-0 -z-10 h-72 w-72 rounded-full bg-gray-200/40 blur-3xl"></div>
+
+  <!-- MAIN -->
+
+  <div class="flex min-h-screen items-center justify-center px-4 py-8 sm:px-6 lg:px-8">
+
+    <!-- CONTAINER -->
+
+    <div class="grid w-full max-w-6xl overflow-hidden rounded-[32px] border border-gray-200 bg-white shadow-[0_20px_80px_rgba(17,17,17,0.08)] lg:grid-cols-2">
+
+      <!-- LEFT SIDE -->
+
+      <div class="relative overflow-hidden bg-[#111] px-6 py-10 text-white sm:px-10 lg:px-14 lg:py-14">
+
+        <!-- GLOW -->
+
+        <div class="absolute -left-20 top-0 h-72 w-72 rounded-full bg-[#ffd166]/10 blur-3xl"></div>
+
+        <div class="relative z-10">
+
+          <!-- BRAND -->
+
+          <div class="flex items-center gap-4">
+
+            <!-- PIZZA ICON -->
+
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ffd166] shadow-lg shadow-[#ffd166]/20">
+
+              <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                class="h-8 w-8">
+
+                <path
+                  d="M3 4L12 21L21 4C15.5 2.5 8.5 2.5 3 4Z"
+                  fill="#ffd166"/>
+
+                <path
+                  d="M3 4C8.5 2.5 15.5 2.5 21 4"
+                  stroke="#c97a00"
+                  stroke-width="2.4"
+                  stroke-linecap="round"/>
+
+                <circle cx="9.5" cy="10" r="1.5" fill="#b91c1c"/>
+                <circle cx="14.5" cy="13" r="1.5" fill="#b91c1c"/>
+                <circle cx="11.5" cy="16.2" r="1.5" fill="#b91c1c"/>
+
+              </svg>
+
+            </div>
+
+            <!-- TEXT -->
+
+            <div>
+
+              <h1 class="text-2xl font-extrabold tracking-tight sm:text-3xl">
+                Golden Crust Pizza
+              </h1>
+
+              <p class="mt-1 text-[13px] font-semibold text-[#ffd166]">
+                Secure Checkout
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- HERO -->
+
+          <div class="mt-14">
+
+            <div class="inline-flex rounded-full border border-[#ffd166]/20 bg-[#ffd166]/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#ffd166]">
+              Fast Delivery
+            </div>
+
+            <h2 class="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl">
+              Complete your order.
+            </h2>
+
+            <p class="mt-6 max-w-lg text-base leading-relaxed text-gray-300 sm:text-lg">
+              Fill in your delivery and payment details
+              to place your Golden Crust Pizza order.
+            </p>
+
+          </div>
+
+          <!-- INFO -->
+
+          <div class="mt-12 space-y-4">
+
+            <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
+
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#ffd166]/15">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-[#ffd166]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor">
+
+                  <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"/>
+
+                </svg>
+
+              </div>
+
+              <div>
+
+                <h3 class="text-sm font-bold">
+                  Safe Checkout
+                </h3>
+
+                <p class="mt-1 text-sm text-gray-400">
+                  Your payment information is protected.
+                </p>
+
+              </div>
+
+            </div>
+
+            <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
+
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#ffd166]/15">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-[#ffd166]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor">
+
+                  <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"/>
+
+                </svg>
+
+              </div>
+
+              <div>
+
+                <h3 class="text-sm font-bold">
+                  Fast Delivery
+                </h3>
+
+                <p class="mt-1 text-sm text-gray-400">
+                  Fresh pizza delivered quickly to your home.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDE -->
+
+      <div class="px-6 py-10 sm:px-10 lg:px-14 lg:py-14">
+
+        <!-- HEADER -->
+
+        <div>
+
+          <div class="inline-flex rounded-full bg-gray-100 px-4 py-2 text-xs font-bold uppercase tracking-wider text-gray-600">
+            Checkout Form
+          </div>
+
+          <h2 class="mt-5 text-3xl font-extrabold tracking-tight text-[#111] sm:text-4xl">
+            Delivery Details
+          </h2>
+
+          <p class="mt-3 text-sm leading-relaxed text-gray-500 sm:text-base">
+            Enter your information below to place your order.
+          </p>
+
+        </div>
+
+        <!-- FORM -->
+
+        <form class="mt-8 space-y-5">
+
+          <!-- FULL NAME -->
+
+          <div>
+
+            <label class="mb-2 block text-sm font-bold text-[#111]">
+              Full Name
+            </label>
+
+            <input
+              type="text"
+              placeholder="Enter your full name"
+              required
+              class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
+            >
+
+          </div>
+
+          <!-- PHONE -->
+
+          <div>
+
+            <label class="mb-2 block text-sm font-bold text-[#111]">
+              Phone Number
+            </label>
+
+            <input
+              type="text"
+              placeholder="Enter your phone number"
+              required
+              class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
+            >
+
+          </div>
+
+          <!-- ADDRESS -->
+
+          <div>
+
+            <label class="mb-2 block text-sm font-bold text-[#111]">
+              Street Address
+            </label>
+
+            <textarea
+              rows="3"
+              placeholder="Enter your street address"
+              required
+              class="w-full resize-none rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"></textarea>
+
+          </div>
+
+          <!-- ROW -->
+
+          <div class="grid gap-5 sm:grid-cols-2">
+
+            <!-- CITY -->
+
+            <div>
+
+              <label class="mb-2 block text-sm font-bold text-[#111]">
+                City
+              </label>
+
+              <input
+                type="text"
+                placeholder="Enter city"
+                required
+                class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
+              >
+
+            </div>
+
+            <!-- ZIP -->
+
+            <div>
+
+              <label class="mb-2 block text-sm font-bold text-[#111]">
+                ZIP Code
+              </label>
+
+              <input
+                type="text"
+                placeholder="ZIP code"
+                required
+                class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
+              >
+
+            </div>
+
+          </div>
+
+          <!-- PAYMENT -->
+
+          <div class="pt-3">
+
+            <h3 class="text-xl font-extrabold tracking-tight text-[#111]">
+              Payment Method
+            </h3>
+
+            <p class="mt-1 text-sm text-gray-500">
+              Choose your preferred payment option.
+            </p>
+
+          </div>
+
+          <!-- SELECT -->
+
+          <div>
+
+            <label class="mb-2 block text-sm font-bold text-[#111]">
+              Choose Payment
+            </label>
+
+            <select
+              id="paymentMethod"
+              onchange="togglePaymentFields()"
+              class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base">
+
+              <option value="">Select Payment</option>
+
+              <option value="gcash">GCash</option>
+
+              <option value="bank">Bank Transfer</option>
+
+              <option value="paypal">PayPal</option>
+
+              <option value="cod">Cash on Delivery</option>
+
+            </select>
+
+          </div>
+
+          <!-- GCASH -->
+
+          <div id="gcashFields" class="hidden">
+
+            <label class="mb-2 block text-sm font-bold text-[#111]">
+              GCash Number
+            </label>
+
+            <input
+              type="text"
+              placeholder="09xxxxxxxxx"
+              class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
+            >
+
+          </div>
+
+          <!-- BANK -->
+
+          <div id="bankFields" class="hidden space-y-5">
+
+            <div>
+
+              <label class="mb-2 block text-sm font-bold text-[#111]">
+                Bank Name
+              </label>
+
+              <input
+                type="text"
+                placeholder="BDO, BPI, Metrobank..."
+                class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
+              >
+
+            </div>
+
+            <div>
+
+              <label class="mb-2 block text-sm font-bold text-[#111]">
+                Account Number
+              </label>
+
+              <input
+                type="text"
+                placeholder="Enter account number"
+                class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
+              >
+
+            </div>
+
+          </div>
+
+          <!-- PAYPAL -->
+
+          <div id="paypalFields" class="hidden">
+
+            <label class="mb-2 block text-sm font-bold text-[#111]">
+              PayPal Email
+            </label>
+
+            <input
+              type="email"
+              placeholder="example@gmail.com"
+              class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
+            >
+
+          </div>
+
+          <!-- BUTTONS -->
+
+          <div class="flex flex-col gap-4 pt-3 sm:flex-row">
+
+            <!-- PLACE ORDER -->
+
+            <button
+              type="button"
+              onclick="window.location.href='Main.html'"
+              class="flex flex-1 items-center justify-center gap-3 rounded-2xl bg-[#111] px-7 py-4 text-sm font-bold uppercase tracking-wide text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:scale-95">
+
+              <svg xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-[#ffd166]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor">
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"/>
+
+              </svg>
+
+              Place Order
+
+            </button>
+
+            <!-- BACK -->
+
+            <button
+              type="button"
+              onclick="window.location.href='Main.html'"
+              class="flex flex-1 items-center justify-center gap-3 rounded-2xl bg-gray-100 px-7 py-4 text-sm font-bold uppercase tracking-wide text-[#111] transition-all duration-300 hover:-translate-y-1 hover:bg-gray-200 hover:shadow-lg active:scale-95">
+
+              <svg xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor">
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 19l-7-7 7-7"/>
+
+              </svg>
+
+              Back
+
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- SCRIPT -->
+
+  <script>
+
+    function togglePaymentFields(){
+
+      const payment = document.getElementById("paymentMethod").value;
+
+      document.getElementById("gcashFields").classList.add("hidden");
+      document.getElementById("bankFields").classList.add("hidden");
+      document.getElementById("paypalFields").classList.add("hidden");
+
+      if(payment === "gcash"){
+        document.getElementById("gcashFields").classList.remove("hidden");
+      }
+
+      if(payment === "bank"){
+        document.getElementById("bankFields").classList.remove("hidden");
+      }
+
+      if(payment === "paypal"){
+        document.getElementById("paypalFields").classList.remove("hidden");
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>The Golden Crust Pizza — Home</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- PREMIUM FONT -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      font-family:'Inter',sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      overflow-x:hidden;
+    }
+
+    @keyframes float{
+
+      0%,100%{
+        transform:translateY(0px);
+      }
+
+      50%{
+        transform:translateY(-12px);
+      }
+
+    }
+
+    ::-webkit-scrollbar{
+      width:8px;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:#d1d5db;
+      border-radius:999px;
+    }
+
+    ::-webkit-scrollbar-track{
+      background:transparent;
+    }
+
+  </style>
+</head>
+
+<body class="bg-[#fafafa] text-[#111] antialiased">
+
+  <!-- BACKGROUND -->
+
+  <div class="fixed left-0 top-0 -z-10 h-72 w-72 rounded-full bg-[#ffd166]/20 blur-3xl"></div>
+
+  <div class="fixed bottom-0 right-0 -z-10 h-72 w-72 rounded-full bg-gray-200/40 blur-3xl"></div>
+
+  <!-- HEADER -->
+
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-[#111]/95 backdrop-blur-xl">
+
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+
+      <!-- BRAND -->
+
+      <div class="flex items-center gap-3">
+
+        <!-- ICON -->
+
+        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ffd166] shadow-lg shadow-[#ffd166]/20">
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            class="h-7 w-7">
+
+            <path
+              d="M3 4L12 21L21 4C15.5 2.5 8.5 2.5 3 4Z"
+              fill="#ffd166"/>
+
+            <path
+              d="M3 4C8.5 2.5 15.5 2.5 21 4"
+              stroke="#c97a00"
+              stroke-width="2.4"
+              stroke-linecap="round"/>
+
+            <circle cx="9.5" cy="10" r="1.5" fill="#b91c1c"/>
+            <circle cx="14.5" cy="13" r="1.5" fill="#b91c1c"/>
+            <circle cx="11.5" cy="16.2" r="1.5" fill="#b91c1c"/>
+
+          </svg>
+
+        </div>
+
+        <!-- TEXT -->
+
+        <div>
+
+          <h1 class="text-lg font-black tracking-wide text-white sm:text-xl">
+            The Golden Crust Pizza
+          </h1>
+
+          <div class="mt-1 flex items-center gap-2 text-xs text-[#ffd166] sm:text-sm">
+
+            <span class="font-semibold">
+              Order & Delivery
+            </span>
+
+            <span class="h-1 w-1 rounded-full bg-[#ffd166]"></span>
+
+            <span>
+              Open Daily
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- BUTTON -->
+
+      <a href="Main.html"
+        class="rounded-2xl bg-[#ffd166] px-5 py-3 text-sm font-black uppercase tracking-wide text-[#111] shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:scale-95">
+
+        Shop Now
+
+      </a>
+
+    </div>
+
+  </header>
+
+  <!-- HERO -->
+
+  <section class="relative overflow-hidden">
+
+    <div class="mx-auto grid min-h-[90vh] max-w-7xl items-center gap-12 px-5 py-14 lg:grid-cols-2 lg:px-8 lg:py-20">
+
+      <!-- LEFT -->
+
+      <div>
+
+        <!-- BADGE -->
+
+        <div class="inline-flex items-center gap-2 rounded-full border border-[#ffd166]/30 bg-[#ffd166]/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#111]">
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+
+            <path stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"/>
+
+          </svg>
+
+          Fast Delivery
+
+        </div>
+
+        <!-- TITLE -->
+
+        <h2 class="mt-6 text-5xl font-black leading-tight text-[#111] sm:text-6xl">
+
+          Hot & Fresh Pizza
+          <span class="text-[#c97a00]">
+            Delivered Fast
+          </span>
+
+        </h2>
+
+        <!-- DESCRIPTION -->
+
+        <p class="mt-6 max-w-xl text-base leading-relaxed text-gray-600 sm:text-lg">
+
+          Order your favorite pizzas for delivery or pickup.
+          Fresh ingredients, crispy crust, and bold flavor in every bite.
+
+        </p>
+
+        <!-- BUTTONS -->
+
+        <div class="mt-10 flex flex-wrap items-center gap-4">
+
+          <a href="Main.html"
+            class="flex items-center justify-center gap-2 rounded-2xl bg-[#111] px-7 py-4 text-sm font-black uppercase tracking-wide text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:scale-95">
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-[#ffd166]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+
+              <path stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 3h2l.4 2m0 0L7 13h10l2-8H5.4"/>
+
+            </svg>
+
+            Shop Now
+
+          </a>
+
+          <a href="about.html"
+            class="rounded-2xl border border-gray-200 bg-white px-7 py-4 text-sm font-bold text-[#111] transition-all duration-300 hover:-translate-y-1 hover:border-[#ffd166] hover:shadow-lg active:scale-95">
+
+            Learn More
+
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <div class="flex justify-center lg:justify-end">
+
+        <div class="animate-[float_4s_ease-in-out_infinite] flex items-center justify-center">
+
+          <div class="relative">
+
+            <!-- GLOW -->
+
+            <div class="absolute inset-0 rounded-full bg-[#ffd166]/20 blur-3xl"></div>
+
+            <!-- PIZZA -->
+
+            <div class="relative flex h-[320px] w-[320px] items-center justify-center rounded-full bg-white shadow-[0_25px_80px_rgba(17,17,17,0.20)] sm:h-[420px] sm:w-[420px] lg:h-[520px] lg:w-[520px]">
+
+              <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                class="h-[180px] w-[180px] sm:h-[240px] sm:w-[240px] lg:h-[300px] lg:w-[300px]">
+
+                <!-- PIZZA -->
+
+                <path
+                  d="M3 4L12 21L21 4C15.5 2.5 8.5 2.5 3 4Z"
+                  fill="#ffd166"/>
+
+                <!-- CRUST -->
+
+                <path
+                  d="M3 4C8.5 2.5 15.5 2.5 21 4"
+                  stroke="#c97a00"
+                  stroke-width="2.4"
+                  stroke-linecap="round"/>
+
+                <!-- PEPPERONI -->
+
+                <circle cx="9.5" cy="10" r="1.5" fill="#b91c1c"/>
+                <circle cx="14.5" cy="13" r="1.5" fill="#b91c1c"/>
+                <circle cx="11.5" cy="16.2" r="1.5" fill="#b91c1c"/>
+
+                <!-- OLIVES -->
+
+                <circle cx="13" cy="9" r="0.8" fill="#111"/>
+                <circle cx="8.5" cy="14" r="0.8" fill="#111"/>
+
+              </svg>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FEATURES -->
+
+  <section class="pb-16">
+
+    <div class="mx-auto grid max-w-7xl gap-5 px-5 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
+
+      <!-- CARD -->
+
+      <div class="group rounded-3xl border border-gray-200 bg-white p-6 shadow-[0_10px_40px_rgba(17,17,17,0.05)] transition-all duration-300 hover:-translate-y-3 hover:border-[#ffd166] hover:shadow-[0_25px_60px_rgba(17,17,17,0.12)]">
+
+        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ffd166]/20 transition-all duration-300 group-hover:scale-110 group-hover:bg-[#ffd166]">
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7 text-[#111]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+
+            <path stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"/>
+
+          </svg>
+
+        </div>
+
+        <h3 class="mt-5 text-xl font-black text-[#111]">
+          Fast Delivery
+        </h3>
+
+        <p class="mt-3 text-sm leading-relaxed text-gray-500">
+          Get your order delivered quickly while still hot and fresh.
+        </p>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="group rounded-3xl border border-gray-200 bg-white p-6 shadow-[0_10px_40px_rgba(17,17,17,0.05)] transition-all duration-300 hover:-translate-y-3 hover:border-[#ffd166] hover:shadow-[0_25px_60px_rgba(17,17,17,0.12)]">
+
+        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ffd166]/20 transition-all duration-300 group-hover:scale-110 group-hover:bg-[#ffd166]">
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7 text-[#111]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+
+            <path stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z"/>
+
+          </svg>
+
+        </div>
+
+        <h3 class="mt-5 text-xl font-black text-[#111]">
+          Fresh Ingredients
+        </h3>
+
+        <p class="mt-3 text-sm leading-relaxed text-gray-500">
+          Quality ingredients prepared fresh daily for bold flavor.
+        </p>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="group rounded-3xl border border-gray-200 bg-white p-6 shadow-[0_10px_40px_rgba(17,17,17,0.05)] transition-all duration-300 hover:-translate-y-3 hover:border-[#ffd166] hover:shadow-[0_25px_60px_rgba(17,17,17,0.12)]">
+
+        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ffd166]/20 transition-all duration-300 group-hover:scale-110 group-hover:bg-[#ffd166]">
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7 text-[#111]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+
+            <path stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"/>
+
+          </svg>
+
+        </div>
+
+        <h3 class="mt-5 text-xl font-black text-[#111]">
+          Easy Ordering
+        </h3>
+
+        <p class="mt-3 text-sm leading-relaxed text-gray-500">
+          Smooth ordering experience designed for mobile and desktop.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer class="border-t border-gray-200 bg-white">
+
+    <div class="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 text-sm text-gray-500 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+
+      <p>
+        © 2025 The Golden Crust Pizza. All rights reserved.
+      </p>
+
+      <span>
+        Contact: 0917-356-0995
+      </span>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>
+

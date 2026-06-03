@@ -1,8 +1,4 @@
-Replace your WHOLE:
 
-backend/server.js
-
-with THIS 😄🔥
 
 require("dotenv").config();
 

@@ -78,8 +78,7 @@ console.log(err);
 
 res.status(500).json({
 
-  message:
-  "Signup failed"
+  message: err.message
 
 });
 
@@ -151,8 +150,7 @@ console.log(err);
 
 res.status(500).json({
 
-  message:
-  "Login failed"
+  message: err.message
 
 });
 

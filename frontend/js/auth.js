@@ -60,7 +60,7 @@ try {
   );
 
   window.location.href =
-  "Main.html";
+  "index.html";
 
 } catch (error) {
 

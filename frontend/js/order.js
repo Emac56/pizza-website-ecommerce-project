@@ -164,7 +164,7 @@ try {
 
 const response =
 await fetch(
-  "https://golden-crust-api.onrender.com/orders",
+  "https://golden-crust-api.onrender.com/api/orders",
   {
 
     method: "POST",
@@ -499,7 +499,7 @@ try {
 
 const response =
 await fetch(
-  `https://golden-crust-api.onrender.com/users/${userId}`
+  `https://golden-crust-api.onrender.com/api/users/${userId}`
 );
 
 const user =

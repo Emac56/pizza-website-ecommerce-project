@@ -23,7 +23,7 @@ if (!loginInput || !password) {
 try {
 
   const response = await fetch(
-    "https://golden-crust-api.onrender.com/auth/login",
+    "https://golden-crust-api.onrender.com/api/auth/login",
     {
       method: "POST",
 
@@ -135,7 +135,7 @@ if (password !== confirmPassword) {
 try {
 
   const response = await fetch(
-    "https://golden-crust-api.onrender.com/auth/signup",
+    "https://golden-crust-api.onrender.com/api/auth/signup",
     {
       method: "POST",
 

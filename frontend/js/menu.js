@@ -7,7 +7,15 @@ async function fetchPizzas() {
   try {
 
     const response =
+<<<<<<< HEAD
     await fetch("https://golden-crust-api.onrender.com/api/pizzas");
+=======
+<<<<<<< HEAD
+    await fetch("https://golden-crust-api.onrender.com/pizzas");
+=======
+    await fetch("https://golden-crust-api.onrender.com/pizza");
+>>>>>>> 263994d (Update node modules packages)
+>>>>>>> 55f0e29 (Update node modules packages)
 
     allProducts = await response.json();
 

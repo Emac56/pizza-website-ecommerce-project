@@ -20,4 +20,9 @@ rejectUnauthorized: false
 
 });
 
+<<<<<<< HEAD
 module.exports = pool;
+=======
+module.exports = pool;
+
+>>>>>>> 263994d (Update node modules packages)

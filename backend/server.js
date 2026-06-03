@@ -1,4 +1,8 @@
+Replace your WHOLE:
 
+backend/server.js
+
+with THIS 😄🔥
 
 require("dotenv").config();
 
@@ -33,73 +37,61 @@ res.send(
 
 });
 
-app.get("/api/users/:id", (req, res) => {
+app.get("/api/users/:id", async (req, res) => {
+
+try {
 
 const userId =
 req.params.id;
 
 const sql =
-"SELECT name, phone FROM users WHERE id = ?";
+"SELECT name, phone FROM users WHERE id = $1";
 
-db.query(
-sql,
-[userId],
-(error, result) => {
+const result =
+await db.query(
+  sql,
+  [userId]
+);
 
-  if (error) {
+if (
+  result.rows.length === 0
+) {
 
-    console.log(error);
+  return res.status(404).json({
 
-    return res.status(500).json({
-      message: "Server error"
-    });
+    message:
+    "User not found"
 
-  }
-
-  if (result.length === 0) {
-
-    return res.status(404).json({
-      message: "User not found"
-    });
-
-  }
-
-  res.json(result[0]);
+  });
 
 }
 
+res.json(
+  result.rows[0]
 );
+
+}
+
+catch (error) {
+
+console.log(error);
+
+return res.status(500).json({
+
+  message:
+  "Server error"
 
 });
 
-app.post("/api/orders", (req, res) => {
+}
+
+});
+
+app.post("/api/orders", async (req, res) => {
+
+try {
 
 const {
-
-user_id,
-
-full_name,
-
-phone_number,
-
-street_address,
-
-city,
-
-zip_code,
-
-payment_method,
-
-payment_details
-
-} = req.body;
-
-const sql =
-"INSERT INTO orders ( user_id, full_name, phone_number, street_address, city, zip_code, payment_method, payment_details ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-db.query(
-sql,
-[
 
   user_id,
 
@@ -117,27 +109,70 @@ sql,
 
   payment_details
 
-],
-(error, result) => {
+} = req.body;
 
-  if (error) {
+const sql = `
+  INSERT INTO orders
+  (
+    user_id,
+    full_name,
+    phone_number,
+    street_address,
+    city,
+    zip_code,
+    payment_method,
+    payment_details
+  )
 
-    console.log(error);
+  VALUES
 
-    return res.status(500).json({
-      message: "Order failed"
-    });
+  ($1, $2, $3, $4, $5, $6, $7, $8)
+`;
 
-  }
+await db.query(
+  sql,
+  [
 
-  res.json({
-    message:
-    "Order saved successfully"
-  });
+    user_id,
+
+    full_name,
+
+    phone_number,
+
+    street_address,
+
+    city,
+
+    zip_code,
+
+    payment_method,
+
+    payment_details
+
+  ]
+);
+
+res.json({
+
+  message:
+  "Order saved successfully"
+
+});
 
 }
 
-);
+catch (error) {
+
+console.log(error);
+
+return res.status(500).json({
+
+  message:
+  "Order failed"
+
+});
+
+}
 
 });
 
@@ -151,4 +186,3 @@ console.log(
 );
 
 });
-

@@ -7,7 +7,7 @@ async function fetchPizzas() {
   try {
 
     const response =
-    await fetch("http://192.168.1.7:5000/api/pizzas");
+    await fetch("https://golden-crust-api.onrender.com/pizzas");
 
     allProducts = await response.json();
 

@@ -4,25 +4,29 @@ const router = express.Router();
 
 const db = require("../config/db");
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
 
-  const sql = "SELECT * FROM pizzas";
+try {
 
-  db.query(sql, (err, result) => {
+const result = await db.query(
+  "SELECT * FROM pizzas"
+);
 
-    if (err) {
+res.json(result.rows);
 
-      console.log(err);
+}
 
-      return res.status(500).json({
-        message: "Failed to fetch pizzas"
-      });
+catch (err) {
 
-    }
+console.log(err);
 
-    res.json(result);
+res.status(500).json({
 
-  });
+  message: "Failed to fetch pizzas"
+
+});
+
+}
 
 });
 

@@ -248,7 +248,7 @@
               Full Name
             </label>
 
-            <input
+            <input id="fullName"
               type="text"
               placeholder="Enter your full name"
               required
@@ -265,7 +265,7 @@
               Phone Number
             </label>
 
-            <input
+            <input id="phoneNumber"
               type="text"
               placeholder="Enter your phone number"
               required
@@ -282,11 +282,15 @@
               Street Address
             </label>
 
-            <textarea
+            <textarea id="streetAddress"
               rows="3"
               placeholder="Enter your street address"
               required
               class="w-full resize-none rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"></textarea>
+	      <p
+  id="streetAddressError"
+  class="mt-2 text-sm text-red-500"
+></p>
 
           </div>
 
@@ -302,12 +306,16 @@
                 City
               </label>
 
-              <input
+              <input id="city"
                 type="text"
                 placeholder="Enter city"
                 required
                 class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
               >
+<p
+  id="cityError"
+  class="mt-2 text-sm text-red-500"
+></p>
 
             </div>
 
@@ -319,12 +327,16 @@
                 ZIP Code
               </label>
 
-              <input
+              <input id="zipCode"
                 type="text"
                 placeholder="ZIP code"
                 required
                 class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
               >
+<p
+  id="zipCodeError"
+  class="mt-2 text-sm text-red-500"
+></p>
 
             </div>
 
@@ -379,11 +391,15 @@
               GCash Number
             </label>
 
-            <input
+            <input id="gcashNumber"
               type="text"
               placeholder="09xxxxxxxxx"
               class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
             >
+<p
+  id="gcashError"
+  class="mt-2 text-sm text-red-500"
+></p>
 
           </div>
 
@@ -397,11 +413,15 @@
                 Bank Name
               </label>
 
-              <input
+              <input id="bankName"
                 type="text"
                 placeholder="BDO, BPI, Metrobank..."
                 class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
               >
+<p
+  id="bankNameError"
+  class="mt-2 text-sm text-red-500"
+></p>
 
             </div>
 
@@ -411,11 +431,15 @@
                 Account Number
               </label>
 
-              <input
+              <input id="bankAccountNumber"
                 type="text"
                 placeholder="Enter account number"
                 class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
               >
+<p
+  id="bankAccountError"
+  class="mt-2 text-sm text-red-500"
+></p>
 
             </div>
 
@@ -429,11 +453,15 @@
               PayPal Email
             </label>
 
-            <input
+            <input id="paypalEmail"
               type="email"
               placeholder="example@gmail.com"
-              class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
+             class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#0ea5b3] focus:bg-white focus:ring-4 focus:ring-[#0ea5b3]/10 sm:text-base"
             >
+<p
+  id="paypalError"
+  class="mt-2 text-sm text-red-500"
+></p>
 
           </div>
 
@@ -445,7 +473,7 @@
 
             <button
               type="button"
-              onclick="window.location.href='Main.html'"
+              onclick="placeOrder()"
               class="flex flex-1 items-center justify-center gap-3 rounded-2xl bg-[#111] px-7 py-4 text-sm font-bold uppercase tracking-wide text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:scale-95">
 
               <svg xmlns="http://www.w3.org/2000/svg"
@@ -501,33 +529,7 @@
 
   </div>
 
-  <!-- SCRIPT -->
-
-  <script>
-
-    function togglePaymentFields(){
-
-      const payment = document.getElementById("paymentMethod").value;
-
-      document.getElementById("gcashFields").classList.add("hidden");
-      document.getElementById("bankFields").classList.add("hidden");
-      document.getElementById("paypalFields").classList.add("hidden");
-
-      if(payment === "gcash"){
-        document.getElementById("gcashFields").classList.remove("hidden");
-      }
-
-      if(payment === "bank"){
-        document.getElementById("bankFields").classList.remove("hidden");
-      }
-
-      if(payment === "paypal"){
-        document.getElementById("paypalFields").classList.remove("hidden");
-      }
-
-    }
-
-  </script>
+<script src="./js/order.js"></script>
 
 </body>
 </html>

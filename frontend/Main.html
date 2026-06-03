@@ -273,8 +273,7 @@
 
                   Explore Menu
                 </button>
-
-              </div>
+             </div>
             </div>
 
             <div class="flex justify-center lg:justify-end">
@@ -498,17 +497,24 @@
     }
   });
 
-const isLoggedIn = localStorage.getItem("isLoggedIn");
+const isLoggedIn =
+localStorage.getItem("isLoggedIn");
 
-  if (!isLoggedIn) {
-    window.location.href = "login.html";
-  }
+if (
+  isLoggedIn !== "true"
+) {
+
+  window.location.href =
+  "login.html";
+
+}
 
 const logoutBtn = document.querySelector("#logoutBtn");
 
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("userId");
       window.location.href = "login.html";
     });
   }

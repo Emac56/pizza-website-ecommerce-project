@@ -27,6 +27,10 @@ app.use("/api/pizzas", pizzaRoutes);
 
 app.get("/", (req, res) => {
 
+app.get("/health", (req, res) => {
+  res.json({ status: "ok" })
+})
+
 res.send(
 "Golden Crust API running"
 );

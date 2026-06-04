@@ -170,17 +170,9 @@
 
             <div
               id="dropMenu"
-              class="dropdown-content invisible absolute right-0 top-16 z-50 w-60 origin-top-right scale-95 overflow-hidden rounded-2xl border border-gray-200 bg-white opacity-0 shadow-2xl transition-all duration-300"
+              class="dropdown-content invisible absolute right-0 top-20 mt-4 z-50 w-60 origin-top-right scale-95 overflow-hidden rounded-2xl border border-gray-200 bg-white opacity-0 shadow-2xl transition-all duration-300"
             >
-              <a href="contact.html"
-                class="flex items-center gap-3 border-b border-gray-100 px-5 py-4 text-sm font-medium text-[#111] transition-all duration-200 hover:bg-[#ffd166]">
-
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8m-18 8h18V8H3v8z"/>
-                </svg>
-
-                Contact Us
-              </a>
+          
 
 
               <a href="report.html"
@@ -192,6 +184,16 @@
 
                 Report a Problem
               </a>
+              
+                  <a href="contact.html"
+                class="flex items-center gap-3 border-b border-gray-100 px-5 py-4 text-sm font-medium text-[#111] transition-all duration-200 hover:bg-[#ffd166]">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8m-18 8h18V8H3v8z"/>
+                </svg>
+
+                Contact Us
+              </a>
 
               <a href="about.html"
                 class="flex items-center gap-3 px-5 py-4 text-sm font-medium text-[#111] transition-all duration-200 hover:bg-[#ffd166]">
@@ -202,10 +204,11 @@
 
                 About Us
               </a>
+              
 
 	<button
   id="logoutBtn"
-  class="rounded-xl bg-red-500 px-4 py-2 text-white"
+  class="flex w-full items-center gap-3 px-5 py-4 text-sm font-medium text-red-500 transition-all duration-200 hover:bg-red-50"
 >
   Logout
 </button>
@@ -485,17 +488,16 @@
     }
   }
 
-  window.addEventListener("click", function(e) {
-    const dropdown = document.querySelector(".dropdown");
+window.addEventListener("click", function(e) {
+  if (!e.target.closest(".dropdown")) { 
     const menu = document.getElementById("dropMenu");
     const arrow = document.getElementById("menuArrow");
 
-    if (!dropdown.contains(e.target)) {
-      menu.classList.remove("visible", "opacity-100", "scale-100");
-      menu.classList.add("invisible", "opacity-0", "scale-95");
-      arrow.classList.remove("rotate-180");
-    }
-  });
+    menu.classList.remove("visible", "opacity-100", "scale-100");
+    menu.classList.add("invisible", "opacity-0", "scale-95");
+    arrow.classList.remove("rotate-180");
+  }
+});
 
 const isLoggedIn =
 localStorage.getItem("isLoggedIn");

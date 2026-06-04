@@ -213,8 +213,11 @@ alert(
   "Thank you! Order successful"
 );
 
+const cartKey =
+`cart_${userId}`;
+
 localStorage.removeItem(
-  "cart"
+  cartKey
 );
 
 window.location.href =

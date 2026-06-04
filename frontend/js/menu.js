@@ -1,6 +1,17 @@
 let allProducts = [];
-let cart = [];
 let toastTimeout;
+
+const userId =
+localStorage.getItem("userId");
+
+const cartKey =
+`cart_${userId}`;
+
+let cart =
+JSON.parse(
+  localStorage.getItem(cartKey)
+) || [];
+
 
 async function fetchPizzas() {
 
@@ -199,9 +210,16 @@ function renderCart() {
 
   cartTotal.textContent = `₱${total}`;
   cartTitle.textContent = `Your cart (${totalItems})`;
+
+localStorage.setItem(
+  cartKey,
+  JSON.stringify(cart)
+);
+
 }
 
 fetchPizzas();
+renderCart();
 
 
 const allBtn =

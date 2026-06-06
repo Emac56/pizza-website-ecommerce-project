@@ -91,6 +91,15 @@ localStorage.getItem(
 "userId"
 );
 
+const cartKey =
+`cart_${userId}`;
+
+const cart =
+JSON.parse(
+  localStorage.getItem(cartKey)
+) || [];
+
+
 const fullName =
 document.querySelector(
 "#fullName"
@@ -178,30 +187,33 @@ await fetch(
 
     body: JSON.stringify({
 
-      user_id:
-      userId,
+  user_id:
+  userId,
 
-      full_name:
-      fullName,
+  full_name:
+  fullName,
 
-      phone_number:
-      phoneNumber,
+  phone_number:
+  phoneNumber,
 
-      street_address:
-      streetAddress,
+  street_address:
+  streetAddress,
 
-      city,
+  city,
 
-      zip_code:
-      zipCode,
+  zip_code:
+  zipCode,
 
-      payment_method:
-      paymentMethod,
+  payment_method:
+  paymentMethod,
 
-      payment_details:
-      paymentDetails
+  payment_details:
+  paymentDetails,
 
-    })
+  items:
+  cart
+
+})
 
   }
 );

@@ -208,7 +208,7 @@ app.get("/api/orders/user/:userId", async (req, res) => {
       SELECT *
       FROM orders
       WHERE user_id = $1
-      ORDER BY created_at DESC
+      ORDER BY id DESC
       `,
       [userId]
     );

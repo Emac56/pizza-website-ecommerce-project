@@ -229,6 +229,40 @@ app.get("/api/orders/user/:userId", async (req, res) => {
 
 });
 
+app.get("/api/orders/:orderId/items", async (req, res) => {
+
+  try {
+
+    const { orderId } = req.params;
+
+    const result = await db.query(
+      `
+      SELECT
+        oi.quantity,
+        oi.price,
+        p.name
+      FROM order_items oi
+      JOIN pizzas p
+      ON oi.pizza_id = p.id
+      WHERE oi.order_id = $1
+      `,
+      [orderId]
+    );
+
+    res.json(result.rows);
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(500).json({
+      message: "Server error"
+    });
+
+  }
+
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

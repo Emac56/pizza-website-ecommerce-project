@@ -195,6 +195,38 @@ app.get("/api/orders/user/:userId", async (req, res) => {
 
 });
 
+app.get("/api/orders/user/:userId", async (req, res) => {
+
+  try {
+
+    const { userId } = req.params;
+
+    const result = await db.query(
+      `
+      SELECT *
+      FROM orders
+      WHERE user_id = $1
+      ORDER BY created_at DESC
+      `,
+      [userId]
+    );
+
+    res.json(result.rows);
+
+  }
+
+  catch (error) {
+
+    console.log(error);
+
+    res.status(500).json({
+      message: "Server error"
+    });
+
+  }
+
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

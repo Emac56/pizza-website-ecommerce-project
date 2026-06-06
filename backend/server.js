@@ -195,6 +195,8 @@ app.get("/api/orders/user/:userId", async (req, res) => {
 
 });
 
+console.log("ORDER HISTORY ROUTE LOADED");
+
 app.get("/api/orders/user/:userId", async (req, res) => {
 
   try {

@@ -27,6 +27,16 @@ document.querySelector(
 
 ordersContainer.innerHTML = "";
 
+const itemsResponse =
+await fetch(
+  `${API_BASE_URL}/api/orders/${order.id}/items`
+);
+
+const items =
+await itemsResponse.json();
+
+console.log(items);
+
 for (const order of orders) {
 
   ordersContainer.innerHTML += `

@@ -39,6 +39,20 @@ console.log(items);
 
 for (const order of orders) {
 
+let itemsHtml = "";
+
+for (const item of items) {
+
+  itemsHtml += `
+  
+    <p>
+      ${item.name} × ${item.quantity}
+    </p>
+
+  `;
+
+}
+
   ordersContainer.innerHTML += `
   
   <div
@@ -84,15 +98,14 @@ for (const order of orders) {
 
     </div>
 
-    <div
-      class="mt-4"
-    >
+<div
+  class="mt-4
+         space-y-2"
+>
 
-      <p>
-        ${order.city}
-      </p>
+  ${itemsHtml}
 
-    </div>
+</div>
 
   </div>
 

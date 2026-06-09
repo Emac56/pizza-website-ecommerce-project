@@ -38,10 +38,14 @@ await itemsResponse.json();
 console.log(items);
 
 for (const order of orders) {
+  
+let total = 0;
 
 let itemsHtml = "";
 
 for (const item of items) {
+  
+  total += Number(item.price) * Number(item.quantity);
 
   itemsHtml += `
   
@@ -108,6 +112,16 @@ for (const item of items) {
 </div>
 
   </div>
+  
+  <div
+  class="mt-4
+         pt-4
+         border-t
+         font-bold
+         text-lg"
+>
+  Total: ₱${total}
+</div>
 
   `;
 

@@ -27,7 +27,12 @@ document.querySelector(
 
 ordersContainer.innerHTML = "";
 
-const itemsResponse =
+
+console.log(items);
+
+for (const order of orders) {
+  
+  const itemsResponse =
 await fetch(
   `${API_BASE_URL}/api/orders/${order.id}/items`
 );
@@ -35,9 +40,6 @@ await fetch(
 const items =
 await itemsResponse.json();
 
-console.log(items);
-
-for (const order of orders) {
   
 let total = 0;
 
@@ -111,9 +113,7 @@ for (const item of items) {
 
 </div>
 
-  </div>
-  
-  <div
+<div
   class="mt-4
          pt-4
          border-t
@@ -121,6 +121,8 @@ for (const item of items) {
          text-lg"
 >
   Total: ₱${total}
+</div>
+
 </div>
 
   `;

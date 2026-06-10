@@ -1,27 +1,61 @@
-const profileContainer =
-document.querySelector(
-  "#profileContainer"
-);
+loadProfile();
 
-const userName =
-localStorage.getItem(
-  "userName"
-);
+async function loadProfile() {
 
-profileContainer.innerHTML = `
-  <div class="space-y-4">
+  const userId =
+    localStorage.getItem(
+      "userId"
+    );
 
-    <div>
+  const profileContainer =
+    document.querySelector(
+      "#profileContainer"
+    );
 
-      <p class="text-gray-500">
-        Name
-      </p>
+  try {
 
-      <p class="font-bold text-lg">
-        ${userName}
-      </p>
+    const response =
+      await fetch(
+        `${API_BASE_URL}/api/users/${userId}`
+      );
 
-    </div>
+    const user =
+      await response.json();
 
-  </div>
-`;
+    profileContainer.innerHTML = `
+      <div class="space-y-6">
+
+        <div>
+
+          <p class="text-gray-500">
+            Name
+          </p>
+
+          <p class="font-bold text-lg">
+            ${user.name}
+          </p>
+
+        </div>
+
+        <div>
+
+          <p class="text-gray-500">
+            Phone Number
+          </p>
+
+          <p class="font-bold text-lg">
+            ${user.phone}
+          </p>
+
+        </div>
+
+      </div>
+    `;
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+}

@@ -53,10 +53,6 @@ try {
     "userId",
     data.user.id
   );
-  localStorage.setItem(
-  "userName",
-  user.name
-);
 
   localStorage.setItem(
     "isLoggedIn",

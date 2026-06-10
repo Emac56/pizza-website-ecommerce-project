@@ -25,33 +25,37 @@ async function loadProfile() {
       await response.json();
 
     profileContainer.innerHTML = `
-      <div class="space-y-6">
+      <div>
 
-        <div>
+  <p class="text-gray-500">
+    Name
+  </p>
 
-          <p class="text-gray-500">
-            Name
-          </p>
+  <div id="profileName">
 
-          <p class="font-bold text-lg">
-            ${user.name}
-          </p>
+    <p class="font-bold text-lg">
+      ${user.name}
+    </p>
 
-        </div>
+  </div>
 
-        <div>
+</div>
 
-          <p class="text-gray-500">
-            Phone Number
-          </p>
+<div>
 
-          <p class="font-bold text-lg">
-            ${user.phone}
-          </p>
+  <p class="text-gray-500">
+    Phone Number
+  </p>
 
-        </div>
+  <div id="profilePhone">
 
-      </div>
+    <p class="font-bold text-lg">
+      ${user.phone}
+    </p>
+
+  </div>
+
+</div>
     `;
 
   } catch (error) {
@@ -71,9 +75,42 @@ document.addEventListener(
       "editProfileBtn"
     ) {
 
-      alert(
-        "Edit Profile coming next step"
-      );
+      const nameElement =
+document.querySelector(
+  "#profileName"
+);
+
+const phoneElement =
+document.querySelector(
+  "#profilePhone"
+);
+
+const currentName =
+nameElement.textContent;
+
+const currentPhone =
+phoneElement.textContent;
+
+nameElement.innerHTML = `
+  <input
+    id="editName"
+    class="w-full border rounded-xl p-3"
+    value="${currentName}"
+  >
+`;
+
+phoneElement.innerHTML = `
+  <input
+    id="editPhone"
+    class="w-full border rounded-xl p-3"
+    value="${currentPhone}"
+  >
+`;
+
+event.target.textContent =
+"Save Profile";
+event.target.id =
+"saveProfileBtn";
 
     }
 

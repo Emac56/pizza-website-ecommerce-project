@@ -1,5 +1,7 @@
 loadProfile();
 
+
+
 async function loadProfile() {
 
   const userId =
@@ -59,3 +61,21 @@ async function loadProfile() {
   }
 
 }
+
+document.addEventListener(
+  "click",
+  (event) => {
+
+    if (
+      event.target.id ===
+      "editProfileBtn"
+    ) {
+
+      alert(
+        "Edit Profile coming next step"
+      );
+
+    }
+
+  }
+);

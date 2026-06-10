@@ -1,5 +1,85 @@
 loadOrders();
 
+function getStatusBadge(status) {
+
+  switch (status) {
+
+    case "Pending":
+      return `
+        <span
+          class="bg-yellow-100
+                 text-yellow-700
+                 px-3 py-1
+                 rounded-full"
+        >
+          Pending
+        </span>
+      `;
+
+    case "Preparing":
+      return `
+        <span
+          class="bg-orange-100
+                 text-orange-700
+                 px-3 py-1
+                 rounded-full"
+        >
+          Preparing
+        </span>
+      `;
+
+    case "Out for Delivery":
+      return `
+        <span
+          class="bg-blue-100
+                 text-blue-700
+                 px-3 py-1
+                 rounded-full"
+        >
+          Out for Delivery
+        </span>
+      `;
+
+    case "Delivered":
+      return `
+        <span
+          class="bg-green-100
+                 text-green-700
+                 px-3 py-1
+                 rounded-full"
+        >
+          Delivered
+        </span>
+      `;
+
+    case "Cancelled":
+      return `
+        <span
+          class="bg-red-100
+                 text-red-700
+                 px-3 py-1
+                 rounded-full"
+        >
+          Cancelled
+        </span>
+      `;
+
+    default:
+      return `
+        <span
+          class="bg-gray-100
+                 text-gray-700
+                 px-3 py-1
+                 rounded-full"
+        >
+          Status Unavailable
+        </span>
+      `;
+  }
+
+}
+
+
 async function loadOrders() {
 
 const userId =
@@ -38,6 +118,8 @@ for (const order of orders) {
 
   let total = 0;
   let itemsHtml = "";
+  
+  
 
   for (const item of items) {
 
@@ -74,14 +156,7 @@ for (const order of orders) {
 
 <div class="flex gap-2">
 
-  <span
-    class="bg-yellow-100
-           text-yellow-700
-           px-3 py-1
-           rounded-full"
-  >
-    ${order.status || "Pending"}
-  </span>
+  ${getStatusBadge(order.status)}
 
   <span
     class="bg-gray-100

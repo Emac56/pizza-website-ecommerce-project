@@ -20,6 +20,31 @@ await fetch(
 const order =
 await response.json();
 
+const itemsResponse =
+await fetch(
+  `${API_BASE_URL}/api/orders/${orderId}/items`
+);
+
+const items =
+await itemsResponse.json();
+
+let itemsHtml = "";
+let total = 0;
+
+for (const item of items) {
+
+  total +=
+    Number(item.price) *
+    Number(item.quantity);
+
+  itemsHtml += `
+    <p>
+      ${item.name} × ${item.quantity}
+    </p>
+  `;
+
+}
+
 document.querySelector(
   "#orderDetails"
 ).innerHTML = `
@@ -59,6 +84,26 @@ document.querySelector(
       <strong>City:</strong>
       ${order.city}
     </p>
+    
+    <hr class="my-4">
+
+<h2 class="text-xl font-bold mb-2">
+  Ordered Items
+</h2>
+
+<div class="space-y-2">
+  ${itemsHtml}
+</div>
+
+<div
+  class="mt-4
+         pt-4
+         border-t
+         font-bold
+         text-xl"
+>
+  Total: ₱${total}
+</div>
 
   </div>
 

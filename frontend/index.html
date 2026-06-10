@@ -538,8 +538,11 @@ localStorage.getItem(
 
 if (userName) {
 
-  userButton.innerHTML =
-    `👤 ${userName}`;
+  const firstName =
+  userName.split(" ")[0];
+
+userButton.innerHTML =
+  `👤 ${firstName}`;
 
   userButton.onclick = () => {
     window.location.href =

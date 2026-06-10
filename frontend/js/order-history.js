@@ -136,7 +136,10 @@ for (const order of orders) {
   }
 
   ordersContainer.innerHTML += `
-    <div class="bg-white rounded-3xl p-6 shadow">
+  <a
+    href="order-details.html?id=${order.id}"
+    class="block bg-white rounded-3xl p-6 shadow"
+  >
 
       <div class="flex justify-between items-center">
 
@@ -152,7 +155,7 @@ for (const order of orders) {
             ).toLocaleDateString()}
           </p>
 
-        </div>
+        </a>
 
 <div class="flex gap-2">
 

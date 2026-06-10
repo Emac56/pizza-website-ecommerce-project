@@ -72,9 +72,27 @@ for (const order of orders) {
 
         </div>
 
-        <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full">
-          ${order.payment_method.toUpperCase()}
-        </span>
+<div class="flex gap-2">
+
+  <span
+    class="bg-yellow-100
+           text-yellow-700
+           px-3 py-1
+           rounded-full"
+  >
+    ${order.status || "Pending"}
+  </span>
+
+  <span
+    class="bg-gray-100
+           text-gray-700
+           px-3 py-1
+           rounded-full"
+  >
+    ${order.payment_method.toUpperCase()}
+  </span>
+
+</div>
 
       </div>
 

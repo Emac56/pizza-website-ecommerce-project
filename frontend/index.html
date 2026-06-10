@@ -216,7 +216,7 @@
             </div>
           </div>
 
-          <button
+          <button id="userButton"
             class="btn flex items-center gap-2 rounded-xl bg-[#ffd166] px-4 py-3 text-sm font-bold text-[#111] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl active:scale-95 sm:px-5"
             onclick="window.location.href='login.html'">
             
@@ -521,6 +521,32 @@ const logoutBtn = document.querySelector("#logoutBtn");
     });
   }
 
+
+</script>
+
+<script>
+
+const userButton =
+document.querySelector(
+  "#userButton"
+);
+
+const userName =
+localStorage.getItem(
+  "userName"
+);
+
+if (userName) {
+
+  userButton.innerHTML =
+    `👤 ${userName}`;
+
+  userButton.onclick = () => {
+    window.location.href =
+      "profile.html";
+  };
+
+}
 
 </script>
 <script src="./js/config.js"></script>

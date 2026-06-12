@@ -112,6 +112,104 @@ if (
     "saveProfileBtn";
 
 }
+
+else if (
+  event.target.id ===
+  "savePasswordBtn"
+) {
+
+  const userId =
+    localStorage.getItem(
+      "userId"
+    );
+
+  const currentPassword =
+    document.querySelector(
+      "#currentPassword"
+    ).value;
+
+  const newPassword =
+    document.querySelector(
+      "#newPassword"
+    ).value;
+
+  const confirmPassword =
+    document.querySelector(
+      "#confirmPassword"
+    ).value;
+
+  if (
+    newPassword !==
+    confirmPassword
+  ) {
+
+    alert(
+      "Passwords do not match"
+    );
+
+    return;
+
+  }
+
+  try {
+
+    const response =
+      await fetch(
+        `${API_BASE_URL}/api/users/${userId}/password`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+          body: JSON.stringify({
+            currentPassword,
+            newPassword
+          })
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if (!response.ok) {
+
+      alert(
+        data.message
+      );
+
+      return;
+
+    }
+
+    alert(
+      "Password updated successfully!"
+    );
+
+    document.querySelector(
+      "#currentPassword"
+    ).value = "";
+
+    document.querySelector(
+      "#newPassword"
+    ).value = "";
+
+    document.querySelector(
+      "#confirmPassword"
+    ).value = "";
+
+  } catch (error) {
+
+    console.log(error);
+
+    alert(
+      "Failed to update password"
+    );
+
+  }
+
+}
+
 else if (
   event.target.id ===
   "changePasswordBtn"

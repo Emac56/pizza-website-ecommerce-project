@@ -1,9 +1,6 @@
 loadProfile();
 
 
-
-
-
 async function loadProfile() {
 
   const userId =
@@ -70,7 +67,7 @@ async function loadProfile() {
 
 document.addEventListener(
   "click",
-  (event) => {
+async (event) => {
 
     if (
       event.target.id ===
@@ -113,6 +110,61 @@ event.target.textContent =
 "Save Profile";
 event.target.id =
 "saveProfileBtn";
+
+if (
+  event.target.id ===
+  "saveProfileBtn"
+) {
+
+  const userId =
+    localStorage.getItem(
+      "userId"
+    );
+
+  const name =
+    document.querySelector(
+      "#editName"
+    ).value;
+
+  const phone =
+    document.querySelector(
+      "#editPhone"
+    ).value;
+
+  try {
+
+    const response =
+      await fetch(
+        `${API_BASE_URL}/api/users/${userId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+          body: JSON.stringify({
+            name,
+            phone
+          })
+        }
+      );
+
+    const data =
+      await response.json();
+
+    alert(
+      "Profile updated successfully!"
+    );
+
+    loadProfile();
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+}
 
     }
 

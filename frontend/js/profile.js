@@ -1,57 +1,40 @@
 loadProfile();
 
+
+
 async function saveProfile() {
 
-    const name =
-        document.getElementById("editName").value.trim();
+  const name =
+    document.getElementById("editName").value.trim();
 
-    const phone =
-        document.getElementById("editPhone").value.trim();
+  const phone =
+    document.getElementById("editPhone").value.trim();
 
-    // Validation (Step 3)
-    if (!validateProfileForm()) {
-        return;
+  const response = await fetch(
+    `/api/users/${userId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        phone
+      })
     }
+  );
 
-    try {
+  const data = await response.json();
 
-        const response = await fetch(
-            `/api/users/${userId}`,
-            {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    name,
-                    phone
-                })
-            }
-        );
+  if (data.success) {
 
-        const data = await response.json();
+    updateProfileUI(
+      data.user.name,
+      data.user.phone
+    );
 
-        if (!response.ok) {
-            throw new Error(
-                data.message || "Failed to update profile"
-            );
-        }
-
-        updateProfileUI(name, phone);
-
-        exitEditMode();
-
-        showSuccess(
-            "Profile updated successfully"
-        );
-
-    } catch (error) {
-
-        showError(
-            error.message
-        );
-
-    }
+    exitEditMode();
+  }
 
 }
 
@@ -93,7 +76,36 @@ function exitEditMode() {
     isEditing = false;
 }
 
+function validateName(name) {
 
+  if (!name.trim()) {
+    return "Name is required";
+  }
+
+  if (name.length < 2) {
+    return "Name must be at least 2 characters";
+  }
+
+  if (name.length > 100) {
+    return "Name must not exceed 100 characters";
+  }
+
+  return null;
+}
+
+function validatePhone(phone) {
+
+  if (!phone) return null;
+
+  const phRegex =
+    /^09\d{9}$/;
+
+  if (!phRegex.test(phone)) {
+    return "Invalid PH mobile number";
+  }
+
+  return null;
+}
 
 let isEditing = false;
 
@@ -113,6 +125,20 @@ editProfileBtn.addEventListener("click", () => {
     saveProfile();
 
 });
+
+const response = await fetch(
+  `/api/users/${userId}`,
+  {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      name,
+      phone
+    })
+  }
+);
 
 async function loadProfile() {
 

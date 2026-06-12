@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const bcrypt = require("bcrypt");
 
 const db = require("./config/db");
 
@@ -30,26 +31,35 @@ app.get("/api/users/:id", async (req, res) => {
 
 try {
 
-const userId = req.params.id;
+const { id } = req.params;
 
 const result = await db.query(
-  "SELECT name, phone FROM users WHERE id = $1",
-  [userId]
+  `
+  SELECT
+    id,
+    name,
+    phone
+  FROM users
+  WHERE id = $1
+  `,
+  [id]
 );
 
 if (result.rows.length === 0) {
+
   return res.status(404).json({
     message: "User not found"
   });
+
 }
 
 res.json(result.rows[0]);
 
 } catch (error) {
 
-console.log(error);
+console.error(error);
 
-return res.status(500).json({
+res.status(500).json({
   message: "Server error"
 });
 
@@ -68,6 +78,14 @@ const {
   phone
 } = req.body;
 
+if (!name || !phone) {
+
+  return res.status(400).json({
+    message: "Name and phone are required"
+  });
+
+}
+
 const result = await db.query(
   `
   UPDATE users
@@ -75,105 +93,20 @@ const result = await db.query(
     name = $1,
     phone = $2
   WHERE id = $3
-  RETURNING *
-  `,
-  [
+  RETURNING
+    id,
+    username,
     name,
+    email,
     phone,
-    id
-  ]
-);
-
-const bcrypt =
-require("bcrypt");
-
-app.put(
-"/api/users/:id/password",
-async (req, res) => {
-
-try {
-
-const { id } =
-req.params;
-
-const {
-  currentPassword,
-  newPassword
-} = req.body;
-
-const userResult =
-await db.query(
-  `
-  SELECT password
-  FROM users
-  WHERE id = $1
-  `,
-  [id]
-);
-
-if (
-  userResult.rows.length === 0
-) {
-
-  return res.status(404).json({
-    message:
-    "User not found"
-  });
-
-}
-
-const validPassword =
-await bcrypt.compare(
-  currentPassword,
-  userResult.rows[0].password
-);
-
-if (!validPassword) {
-
-  return res.status(400).json({
-    message:
-    "Current password is incorrect"
-  });
-
-}
-
-const hashedPassword =
-await bcrypt.hash(
-  newPassword,
-  10
-);
-
-await db.query(
-  `
-  UPDATE users
-  SET password = $1
-  WHERE id = $2
+    created_at
   `,
   [
-    hashedPassword,
+    name.trim(),
+    phone.trim(),
     id
   ]
 );
-
-res.json({
-  message:
-  "Password updated successfully"
-});
-
-}
-
-catch (error) {
-
-console.log(error);
-
-res.status(500).json({
-  message:
-  "Server error"
-});
-
-}
-
-});
 
 if (result.rows.length === 0) {
 
@@ -190,7 +123,99 @@ res.json({
 
 } catch (error) {
 
-console.log(error);
+console.error(error);
+
+res.status(500).json({
+  message: "Server error"
+});
+
+}
+
+});
+
+app.put("/api/users/:id/password", async (req, res) => {
+
+try {
+
+const { id } = req.params;
+
+const {
+  currentPassword,
+  newPassword
+} = req.body;
+
+if (!currentPassword || !newPassword) {
+
+  return res.status(400).json({
+    message: "All password fields are required"
+  });
+
+}
+
+if (newPassword.length < 6) {
+
+  return res.status(400).json({
+    message: "Password must be at least 6 characters"
+  });
+
+}
+
+const userResult = await db.query(
+  `
+  SELECT password
+  FROM users
+  WHERE id = $1
+  `,
+  [id]
+);
+
+if (userResult.rows.length === 0) {
+
+  return res.status(404).json({
+    message: "User not found"
+  });
+
+}
+
+const validPassword =
+  await bcrypt.compare(
+    currentPassword,
+    userResult.rows[0].password
+  );
+
+if (!validPassword) {
+
+  return res.status(400).json({
+    message: "Current password is incorrect"
+  });
+
+}
+
+const hashedPassword =
+  await bcrypt.hash(
+    newPassword,
+    10
+  );
+
+await db.query(
+  `
+  UPDATE users
+  SET password = $1
+  WHERE id = $2
+  `,
+  [
+    hashedPassword,
+    id
+  ]
+);
+
+res.json({
+  message: "Password updated successfully"
+});
+
+} catch (error) {
+
+console.error(error);
 
 res.status(500).json({
   message: "Server error"
@@ -217,15 +242,19 @@ const {
 } = req.body;
 
 if (!user_id) {
+
   return res.status(400).json({
     message: "User ID is required"
   });
+
 }
 
-if (!items || items.length === 0) {
+if (!Array.isArray(items) || items.length === 0) {
+
   return res.status(400).json({
     message: "Cart is empty"
   });
+
 }
 
 await db.query("BEGIN");
@@ -259,7 +288,8 @@ const orderResult = await db.query(
   ]
 );
 
-const orderId = orderResult.rows[0].id;
+const orderId =
+  orderResult.rows[0].id;
 
 for (const item of items) {
 
@@ -287,7 +317,7 @@ for (const item of items) {
 
 await db.query("COMMIT");
 
-return res.json({
+res.json({
   message: "Order saved successfully",
   order_id: orderId
 });
@@ -296,9 +326,9 @@ return res.json({
 
 await db.query("ROLLBACK").catch(() => {});
 
-console.log(error);
+console.error(error);
 
-return res.status(500).json({
+res.status(500).json({
   message: "Order failed"
 });
 
@@ -308,146 +338,110 @@ return res.status(500).json({
 
 app.get("/api/orders/user/:userId", async (req, res) => {
 
-  try {
+try {
 
-    const { userId } = req.params;
+const { userId } = req.params;
 
-    const result = await db.query(
-      `
-      SELECT *
-      FROM orders
-      WHERE user_id = $1
-      ORDER BY created_at DESC
-      `,
-      [userId]
-    );
+const result = await db.query(
+  `
+  SELECT *
+  FROM orders
+  WHERE user_id = $1
+  ORDER BY created_at DESC
+  `,
+  [userId]
+);
 
-    res.json(result.rows);
+res.json(result.rows);
 
-  }
+} catch (error) {
 
-  catch (error) {
+console.error(error);
 
-    console.log(error);
-
-    res.status(500).json({
-      message: "Server error"
-    });
-
-  }
-
+res.status(500).json({
+  message: "Server error"
 });
 
-console.log("ORDER HISTORY ROUTE LOADED");
-
-app.get("/api/orders/user/:userId", async (req, res) => {
-
-  try {
-
-    const { userId } = req.params;
-
-    const result = await db.query(
-      `
-      SELECT *
-      FROM orders
-      WHERE user_id = $1
-      ORDER BY id DESC
-      `,
-      [userId]
-    );
-
-    res.json(result.rows);
-
-  }
-
-  catch (error) {
-
-    console.log(error);
-
-    res.status(500).json({
-      message: "Server error"
-    });
-
-  }
+}
 
 });
 
 app.get("/api/orders/:orderId/items", async (req, res) => {
 
-  try {
+try {
 
-    const { orderId } = req.params;
+const { orderId } = req.params;
 
-    const result = await db.query(
-      `
-      SELECT
-        oi.quantity,
-        oi.price,
-        p.name
-      FROM order_items oi
-      JOIN pizzas p
-      ON oi.pizza_id = p.id
-      WHERE oi.order_id = $1
-      `,
-      [orderId]
-    );
+const result = await db.query(
+  `
+  SELECT
+    oi.quantity,
+    oi.price,
+    p.name
+  FROM order_items oi
+  JOIN pizzas p
+  ON oi.pizza_id = p.id
+  WHERE oi.order_id = $1
+  `,
+  [orderId]
+);
 
-    res.json(result.rows);
+res.json(result.rows);
 
-  } catch (error) {
+} catch (error) {
 
-    console.log(error);
+console.error(error);
 
-    res.status(500).json({
-      message: "Server error"
-    });
+res.status(500).json({
+  message: "Server error"
+});
 
-  }
+}
 
 });
 
 app.get("/api/orders/:id", async (req, res) => {
 
-  try {
+try {
 
-    const { id } = req.params;
+const { id } = req.params;
 
-    const result = await db.query(
-      `
-      SELECT *
-      FROM orders
-      WHERE id = $1
-      `,
-      [id]
-    );
+const result = await db.query(
+  `
+  SELECT *
+  FROM orders
+  WHERE id = $1
+  `,
+  [id]
+);
 
-    if (result.rows.length === 0) {
+if (result.rows.length === 0) {
 
-      return res.status(404).json({
-        message: "Order not found"
-      });
+  return res.status(404).json({
+    message: "Order not found"
+  });
 
-    }
+}
 
-    res.json(
-      result.rows[0]
-    );
+res.json(result.rows[0]);
 
-  } catch (error) {
+} catch (error) {
 
-    console.log(error);
+console.error(error);
 
-    res.status(500).json({
-      message: "Server error"
-    });
+res.status(500).json({
+  message: "Server error"
+});
 
-  }
+}
 
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT =
+process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+console.log(
+"Server running on port ${PORT}"
+);
 });
-//

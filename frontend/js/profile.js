@@ -112,6 +112,22 @@ if (
     "saveProfileBtn";
 
 }
+else if (
+  event.target.id ===
+  "changePasswordBtn"
+) {
+
+  document
+    .querySelector(
+      "#passwordSection"
+    )
+    .classList
+    .remove(
+      "hidden"
+    );
+
+}
+
 
 else if (
   event.target.id ===

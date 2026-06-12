@@ -225,8 +225,6 @@ res.status(500).json({
 
 });
 
-const bcrypt = require("bcryptjs");
-
 app.put("/api/users/:id/password", async (req, res) => {
 
   try {

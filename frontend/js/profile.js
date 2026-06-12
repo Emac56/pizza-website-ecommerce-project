@@ -1,117 +1,119 @@
 loadProfile();
 
-
 async function loadProfile() {
 
-  const userId =
-    localStorage.getItem(
-      "userId"
-    );
+const userId =
+localStorage.getItem(
+"userId"
+);
 
-  const profileContainer =
-    document.querySelector(
-      "#profileContainer"
-    );
+const profileContainer =
+document.querySelector(
+"#profileContainer"
+);
 
-  try {
+try {
 
-    const response =
-      await fetch(
-        `${API_BASE_URL}/api/users/${userId}`
-      );
+const response =
+  await fetch(
+    `${API_BASE_URL}/api/users/${userId}`
+  );
 
-    const user =
-      await response.json();
+const user =
+  await response.json();
 
-    profileContainer.innerHTML = `
-      <div>
+profileContainer.innerHTML = `
+  <div>
 
-  <p class="text-gray-500">
-    Name
-  </p>
-
-  <div id="profileName">
-
-    <p class="font-bold text-lg">
-      ${user.name}
+    <p class="text-gray-500">
+      Name
     </p>
+
+    <div id="profileName">
+
+      <p class="font-bold text-lg">
+        ${user.name}
+      </p>
+
+    </div>
 
   </div>
 
-</div>
+  <div class="mt-4">
 
-<div>
-
-  <p class="text-gray-500">
-    Phone Number
-  </p>
-
-  <div id="profilePhone">
-
-    <p class="font-bold text-lg">
-      ${user.phone}
+    <p class="text-gray-500">
+      Phone Number
     </p>
 
+    <div id="profilePhone">
+
+      <p class="font-bold text-lg">
+        ${user.phone}
+      </p>
+
+    </div>
+
   </div>
+`;
 
-</div>
-    `;
+} catch (error) {
 
-  } catch (error) {
+console.log(error);
 
-    console.log(error);
-
-  }
+}
 
 }
 
 document.addEventListener(
-  "click",
+"click",
 async (event) => {
 
-    if (
-      event.target.id ===
-      "editProfileBtn"
-    ) {
-
-      const nameElement =
-document.querySelector(
-  "#profileName"
-);
-
-const phoneElement =
-document.querySelector(
-  "#profilePhone"
-);
-
-const currentName =
-nameElement.textContent;
-
-const currentPhone =
-phoneElement.textContent;
-
-nameElement.innerHTML = `
-  <input
-    id="editName"
-    class="w-full border rounded-xl p-3"
-    value="${currentName}"
-  >
-`;
-
-phoneElement.innerHTML = `
-  <input
-    id="editPhone"
-    class="w-full border rounded-xl p-3"
-    value="${currentPhone}"
-  >
-`;
-
-event.target.textContent =
-"Save Profile";
-event.target.id =
-"saveProfileBtn";
-
 if (
+  event.target.id ===
+  "editProfileBtn"
+) {
+
+  const nameElement =
+    document.querySelector(
+      "#profileName"
+    );
+
+  const phoneElement =
+    document.querySelector(
+      "#profilePhone"
+    );
+
+  const currentName =
+    nameElement.textContent.trim();
+
+  const currentPhone =
+    phoneElement.textContent.trim();
+
+  nameElement.innerHTML = `
+    <input
+      id="editName"
+      class="w-full border rounded-xl p-3"
+      value="${currentName}"
+    >
+  `;
+
+  phoneElement.innerHTML = `
+    <input
+      id="editPhone"
+      class="w-full border rounded-xl p-3"
+      value="${currentPhone}"
+    >
+  `;
+
+  event.target.textContent =
+    "Save Profile";
+
+  event.target.id =
+    "saveProfileBtn";
+
+}
+
+else if (
   event.target.id ===
   "saveProfileBtn"
 ) {
@@ -149,14 +151,28 @@ if (
         }
       );
 
-    const data =
-      await response.json();
+    await response.json();
 
     alert(
       "Profile updated successfully!"
     );
 
     loadProfile();
+
+    const button =
+      document.querySelector(
+        "#saveProfileBtn"
+      );
+
+    if (button) {
+
+      button.textContent =
+        "Edit Profile";
+
+      button.id =
+        "editProfileBtn";
+
+    }
 
   } catch (error) {
 
@@ -166,7 +182,5 @@ if (
 
 }
 
-    }
-
-  }
+}
 );

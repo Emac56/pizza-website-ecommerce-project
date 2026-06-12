@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const db = require("./config/db");
 
@@ -225,7 +225,7 @@ res.status(500).json({
 
 });
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 app.put("/api/users/:id/password", async (req, res) => {
 

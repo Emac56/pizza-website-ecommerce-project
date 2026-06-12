@@ -225,6 +225,93 @@ res.status(500).json({
 
 });
 
+const bcrypt = require("bcrypt");
+
+app.put("/api/users/:id/password", async (req, res) => {
+
+  try {
+
+    const { id } = req.params;
+
+    const {
+      currentPassword,
+      newPassword
+    } = req.body;
+
+    const userResult =
+      await db.query(
+        `
+        SELECT password
+        FROM users
+        WHERE id = $1
+        `,
+        [id]
+      );
+
+    if (
+      userResult.rows.length === 0
+    ) {
+
+      return res.status(404).json({
+        message:
+          "User not found"
+      });
+
+    }
+
+    const validPassword =
+      await bcrypt.compare(
+        currentPassword,
+        userResult.rows[0].password
+      );
+
+    if (!validPassword) {
+
+      return res.status(400).json({
+        message:
+          "Current password is incorrect"
+      });
+
+    }
+
+    const hashedPassword =
+      await bcrypt.hash(
+        newPassword,
+        10
+      );
+
+    await db.query(
+      `
+      UPDATE users
+      SET password = $1
+      WHERE id = $2
+      `,
+      [
+        hashedPassword,
+        id
+      ]
+    );
+
+    res.json({
+      message:
+        "Password updated successfully"
+    });
+
+  }
+
+  catch (error) {
+
+    console.log(error);
+
+    res.status(500).json({
+      message:
+        "Server error"
+    });
+
+  }
+
+});
+
 app.post("/api/orders", async (req, res) => {
 
 try {

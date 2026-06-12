@@ -57,6 +57,58 @@ return res.status(500).json({
 
 });
 
+app.put("/api/users/:id", async (req, res) => {
+
+try {
+
+const { id } = req.params;
+
+const {
+  name,
+  phone
+} = req.body;
+
+const result = await db.query(
+  `
+  UPDATE users
+  SET
+    name = $1,
+    phone = $2
+  WHERE id = $3
+  RETURNING *
+  `,
+  [
+    name,
+    phone,
+    id
+  ]
+);
+
+if (result.rows.length === 0) {
+
+  return res.status(404).json({
+    message: "User not found"
+  });
+
+}
+
+res.json({
+  message: "Profile updated",
+  user: result.rows[0]
+});
+
+} catch (error) {
+
+console.log(error);
+
+res.status(500).json({
+  message: "Server error"
+});
+
+}
+
+});
+
 app.post("/api/orders", async (req, res) => {
 
 try {
